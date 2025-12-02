@@ -1,94 +1,576 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Professional Links</title>
-    <style>
-        /* --- Basic Setup --- */
-        body {
-            background-color: #f4f4f9;
-            color: #333;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e50e62b349ad70685de53b629052ee59 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
 
-        /* --- Main Content Container --- */
-        .container {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
 
-        /* --- Profile Picture --- */
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
 
-        /* --- Text Styling --- */
-        h1 {
-            font-size: 1.8em;
-            margin: 0 0 5px 0;
-        }
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
 
-        p {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        /* --- Link Buttons --- */
-        .link {
-            display: block;
-            background-color: #fff;
-            color: #007BFF;
-            padding: 15px 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1em;
-            border: 2px solid #007BFF;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: all 0.2s ease-in-out;
-        }
-
-        .link:hover {
-            background-color: #007BFF;
-            color: #fff;
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
-    </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
 </head>
 <body>
-
-    <div class="container">
-
-        <img src="https://media.licdn.com/dms/image/v2/C4E03AQF-4DDfxVur6w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1616547860397?e=1762992000&v=beta&t=7mV40iFQfzk3Pfp1PD4qxHK-11iMTlZTxvYCYbPBpVg" alt="Your Name" class="profile-pic">
-
-        <h1>Mikel Ridgeway</h1>
-
-        <p>AI Engineer | Data Scientist | Marine Corps Veteran</p>
-
-        <div>
-            <a href="https://docs.google.com/document/d/1PffDpHX3r0zNDKysyilToZ7MzkGDNn1Ot_KYaLEbiVY/edit?usp=sharing" class="link" target="_blank">📄 View My Resume</a>
-            <a href="https://www.linkedin.com/in/mikel-ridgeway/" class="link" target="_blank">🔗 Connect on LinkedIn</a>
-            <a href="https://github.com/RM-0311?tab=repositories" class="link" target="_blank">💻 See My Code on GitHub</a>
-            </div>
-
-        </div>
-
+    
+    
+            <div class="folium-map" id="map_e50e62b349ad70685de53b629052ee59" ></div>
+        
 </body>
+<script>
+    
+    
+            var map_e50e62b349ad70685de53b629052ee59 = L.map(
+                "map_e50e62b349ad70685de53b629052ee59",
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 3,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b32f5b13ea4be3adcaca60bd2b3157f5 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b32f5b13ea4be3adcaca60bd2b3157f5.addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+            var circle_marker_071c910f1ee26ee19472120a5b8adaaf = L.circleMarker(
+                [38.8950368, -77.0365427],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_534f3eff8804a418f0c7e2008ec0b023 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f7bf7a184ba2cd6abac73da30730b6b4 = $(`<div id="html_f7bf7a184ba2cd6abac73da30730b6b4" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Washington D.C. National Guard Shooting and Suspect's CIA Ties</h4>                 <p><b>Location:</b> Washington D.C., USA</p>                 <p><b>Severity:</b> 0.7</p>                 <p><b>Entities:</b> National Guardsmen, ICE, Ken Dilanian, Hegseth, CIA-backed unit, Shooting Suspect</p>                 <p>A shooting incident in Washington D.C. involving National Guardsmen has led to increased troop deployment and revealed the suspect's past ties to a CIA-backed unit in Afghanistan.</p>                 <p><small>Sources: 5</small></p>             </div>             </div>`)[0];
+                popup_534f3eff8804a418f0c7e2008ec0b023.setContent(html_f7bf7a184ba2cd6abac73da30730b6b4);
+            
+        
+
+        circle_marker_071c910f1ee26ee19472120a5b8adaaf.bindPopup(popup_534f3eff8804a418f0c7e2008ec0b023)
+        ;
+
+        
+    
+    
+            var circle_marker_7897f4498df83c8a7213683e31a010ac = L.circleMarker(
+                [39.7837304, -100.445882],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_45850fce9c414b37474cb9412b7ed5aa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_30a0493e94e25b17d15fa337a3617b25 = $(`<div id="html_30a0493e94e25b17d15fa337a3617b25" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Thanksgiving: Historical Proclamation and Modern Debates</h4>                 <p><b>Location:</b> United States</p>                 <p><b>Severity:</b> 0.2</p>                 <p><b>Entities:</b> Indigenous Peoples, George Washington, U.S.</p>                 <p>Discussions surrounding Thanksgiving highlight its historical origins, including George Washington's proclamation, and contemporary debates regarding its glorification of colonization.</p>                 <p><small>Sources: 2</small></p>             </div>             </div>`)[0];
+                popup_45850fce9c414b37474cb9412b7ed5aa.setContent(html_30a0493e94e25b17d15fa337a3617b25);
+            
+        
+
+        circle_marker_7897f4498df83c8a7213683e31a010ac.bindPopup(popup_45850fce9c414b37474cb9412b7ed5aa)
+        ;
+
+        
+    
+    
+            var circle_marker_cc7470bc6ba097bbdd0101b51a876909 = L.circleMarker(
+                [51.566874, 4.9284972],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_8ad6ed23d427a7aabc98caa12376411e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9b66aed9040e0d6b9399a3a05c72fd30 = $(`<div id="html_9b66aed9040e0d6b9399a3a05c72fd30" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Development of Water-Conflict Classifier Software</h4>                 <p><b>Location:</b> N/A</p>                 <p><b>Severity:</b> 0.1</p>                 <p><b>Entities:</b> </p>                 <p>A new software tool, 'water-conflict-classifier 0.1.4', has been developed to classify water-related conflict events using a SetFit-based multi-label approach.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_8ad6ed23d427a7aabc98caa12376411e.setContent(html_9b66aed9040e0d6b9399a3a05c72fd30);
+            
+        
+
+        circle_marker_cc7470bc6ba097bbdd0101b51a876909.bindPopup(popup_8ad6ed23d427a7aabc98caa12376411e)
+        ;
+
+        
+    
+    
+            var circle_marker_3f07a4d365b70a0045bdd94d21ed5e76 = L.circleMarker(
+                [38.9435143, -77.0680334],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_e5fe2ea092a1319a732040f3192e389d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_86076a683e9c1ed36001576d53bbfdc7 = $(`<div id="html_86076a683e9c1ed36001576d53bbfdc7" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>US-Pakistan F-16 Sales and Strategic Relationship Review</h4>                 <p><b>Location:</b> Pakistan, United States</p>                 <p><b>Severity:</b> 0.5</p>                 <p><b>Entities:</b> United States, Pakistan, Trump administration</p>                 <p>The strategic implications of the U.S. practice of selling F-16s to Pakistan are being revisited, particularly amidst warmer ties with the second Trump administration.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_e5fe2ea092a1319a732040f3192e389d.setContent(html_86076a683e9c1ed36001576d53bbfdc7);
+            
+        
+
+        circle_marker_3f07a4d365b70a0045bdd94d21ed5e76.bindPopup(popup_e5fe2ea092a1319a732040f3192e389d)
+        ;
+
+        
+    
+    
+            var circle_marker_fd9174c6521371be2acb14487d2a5c50 = L.circleMarker(
+                [31.9514266, -102.1729563],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_bd08e34c728b27c74f46c240217f4bc4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9878b9ee35e9891da1fcbb8dfb4805fa = $(`<div id="html_9878b9ee35e9891da1fcbb8dfb4805fa" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>US Foreign Policy and Public Sentiment on International Engagement</h4>                 <p><b>Location:</b> United States, Global</p>                 <p><b>Severity:</b> 0.4</p>                 <p><b>Entities:</b> American people, U.S. government</p>                 <p>A discussion on American foreign policy highlights a growing gap between government strategy and public sentiment, with many Americans favoring withdrawal from international engagement due to domestic issues.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_bd08e34c728b27c74f46c240217f4bc4.setContent(html_9878b9ee35e9891da1fcbb8dfb4805fa);
+            
+        
+
+        circle_marker_fd9174c6521371be2acb14487d2a5c50.bindPopup(popup_bd08e34c728b27c74f46c240217f4bc4)
+        ;
+
+        
+    
+    
+            var circle_marker_aea08ad9848aa4cea4baf2623003b3ae = L.circleMarker(
+                [-28.8166236, 24.991639],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_d46466b338c58ff5cd81e41435e6cfba = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fcb42f75b916f1b7d5842f1012e89c83 = $(`<div id="html_fcb42f75b916f1b7d5842f1012e89c83" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>G20 Summit in South Africa</h4>                 <p><b>Location:</b> South Africa</p>                 <p><b>Severity:</b> 0.5</p>                 <p><b>Entities:</b> G20 member countries, South Africa, China (Xi Jinping), Russia (Vladimir Putin), United States</p>                 <p>The G20 summit in South Africa saw multilateralism survive despite the U.S. boycotting the event and China and Russia sending high-level delegations instead of their heads of state.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_d46466b338c58ff5cd81e41435e6cfba.setContent(html_fcb42f75b916f1b7d5842f1012e89c83);
+            
+        
+
+        circle_marker_aea08ad9848aa4cea4baf2623003b3ae.bindPopup(popup_d46466b338c58ff5cd81e41435e6cfba)
+        ;
+
+        
+    
+    
+            var circle_marker_2f58ab02137627fc6cfc722efb61ab4a = L.circleMarker(
+                [64.6863136, 97.7453061],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_465bfdcb87b7fa10fa6ef300621a0e51 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c43e8c0ba64aa0e9390c0a9f987c6215 = $(`<div id="html_c43e8c0ba64aa0e9390c0a9f987c6215" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>OSINT Analysis Reveals Putin's Location Details</h4>                 <p><b>Location:</b> Russia</p>                 <p><b>Severity:</b> 0.3</p>                 <p><b>Entities:</b> Vladimir Putin</p>                 <p>OSINT analysis has reportedly revealed details about Vladimir Putin's location by identifying tiny discrepancies in his replica offices.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_465bfdcb87b7fa10fa6ef300621a0e51.setContent(html_c43e8c0ba64aa0e9390c0a9f987c6215);
+            
+        
+
+        circle_marker_2f58ab02137627fc6cfc722efb61ab4a.bindPopup(popup_465bfdcb87b7fa10fa6ef300621a0e51)
+        ;
+
+        
+    
+    
+            var circle_marker_56fbf64c8dc07369f3b6aef164a82981 = L.circleMarker(
+                [29.5619093, 106.5741998],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_70317cd3e38dd397c52848ad8db17ee4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_96d96283a426092c7220325f4ab04a0e = $(`<div id="html_96d96283a426092c7220325f4ab04a0e" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Concerns Over China's Trade Practices</h4>                 <p><b>Location:</b> China, Global</p>                 <p><b>Severity:</b> 0.5</p>                 <p><b>Entities:</b> China</p>                 <p>Concerns are being raised that China's trade practices are creating significant difficulties and making international trade impossible for some.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_70317cd3e38dd397c52848ad8db17ee4.setContent(html_96d96283a426092c7220325f4ab04a0e);
+            
+        
+
+        circle_marker_56fbf64c8dc07369f3b6aef164a82981.bindPopup(popup_70317cd3e38dd397c52848ad8db17ee4)
+        ;
+
+        
+    
+    
+            var circle_marker_029092c554867ab97b1e17d4a2bdc93a = L.circleMarker(
+                [-35.3051067, 149.1134993],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_b67976c1ff7e686bb3ce540f3ad6bbaa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e773fcadf69627abaf7905852219f109 = $(`<div id="html_e773fcadf69627abaf7905852219f109" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Australia Designates Iran's Revolutionary Guard as Terror Sponsor</h4>                 <p><b>Location:</b> Australia, Iran</p>                 <p><b>Severity:</b> 0.6</p>                 <p><b>Entities:</b> Australia, Iran’s Revolutionary Guard</p>                 <p>Australia has officially listed Iran’s Revolutionary Guard as a state sponsor of terrorism, escalating diplomatic tensions.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_b67976c1ff7e686bb3ce540f3ad6bbaa.setContent(html_e773fcadf69627abaf7905852219f109);
+            
+        
+
+        circle_marker_029092c554867ab97b1e17d4a2bdc93a.bindPopup(popup_b67976c1ff7e686bb3ce540f3ad6bbaa)
+        ;
+
+        
+    
+    
+            var circle_marker_8b6bc0913b60698d9b266df1f607f9e4 = L.circleMarker(
+                [51.5095043, -0.1916457],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_121775a70d63c20c837bf325948b8d98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_88af26925df6e7818651f49f646be1ea = $(`<div id="html_88af26925df6e7818651f49f646be1ea" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Britain Considers Unlocking Russian 'Dirty Money'</h4>                 <p><b>Location:</b> United Kingdom, Russia</p>                 <p><b>Severity:</b> 0.5</p>                 <p><b>Entities:</b> Britain, Russia</p>                 <p>Britain is reportedly considering mechanisms to unlock Russian 'dirty money' and discussions are ongoing about how these funds could potentially be utilized.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_121775a70d63c20c837bf325948b8d98.setContent(html_88af26925df6e7818651f49f646be1ea);
+            
+        
+
+        circle_marker_8b6bc0913b60698d9b266df1f607f9e4.bindPopup(popup_121775a70d63c20c837bf325948b8d98)
+        ;
+
+        
+    
+    
+            var circle_marker_b1c39f5ff2fd7820a91b9eb3ea67269f = L.circleMarker(
+                [12.5433216, 104.8144914],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_2e6afa1e4b82d156cf3cc21cdce796e1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b604b6d62c2d1559eb868912dd381d8b = $(`<div id="html_b604b6d62c2d1559eb868912dd381d8b" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Humanitarian Crisis for Returned Migrant Workers in Cambodia</h4>                 <p><b>Location:</b> Cambodia</p>                 <p><b>Severity:</b> 0.6</p>                 <p><b>Entities:</b> Cambodian migrant workers</p>                 <p>Returned migrant workers in Cambodia are reportedly facing severe hunger and joblessness, indicating a humanitarian and economic crisis.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_2e6afa1e4b82d156cf3cc21cdce796e1.setContent(html_b604b6d62c2d1559eb868912dd381d8b);
+            
+        
+
+        circle_marker_b1c39f5ff2fd7820a91b9eb3ea67269f.bindPopup(popup_2e6afa1e4b82d156cf3cc21cdce796e1)
+        ;
+
+        
+    
+    
+            var circle_marker_58b46f10535db42f2ceb902e93ec3cda = L.circleMarker(
+                [47.0190847, 28.8373902],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_19266aba122b86b36896c03096d74254 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_91070b1bf68e16e199f68a44a621d23c = $(`<div id="html_91070b1bf68e16e199f68a44a621d23c" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Analysis of Great Power Conflict Causes</h4>                 <p><b>Location:</b> Global, Historical</p>                 <p><b>Severity:</b> 0.3</p>                 <p><b>Entities:</b> Great Powers</p>                 <p>An extensive interview discusses the historical patterns and underlying causes that lead Great Powers into conflict, and how such wars might be avoided, referencing events like the Peloponnesian War.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_19266aba122b86b36896c03096d74254.setContent(html_91070b1bf68e16e199f68a44a621d23c);
+            
+        
+
+        circle_marker_58b46f10535db42f2ceb902e93ec3cda.bindPopup(popup_19266aba122b86b36896c03096d74254)
+        ;
+
+        
+    
+    
+            var circle_marker_7cb342824d5cfc77b3b8dbd08cd7415f = L.circleMarker(
+                [38.9505217, -77.1452245],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_fa7813226035d5a28361fe0b5adf330c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8e3e1039d6f10e8b9fea02b50f7ab5d3 = $(`<div id="html_8e3e1039d6f10e8b9fea02b50f7ab5d3" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Speculation on Political and Demographic Presence within the CIA</h4>                 <p><b>Location:</b> United States (CIA)</p>                 <p><b>Severity:</b> 0.4</p>                 <p><b>Entities:</b> CIA, MAGA, Mormons, Donald Trump</p>                 <p>Discussions on Reddit speculate about the extent of MAGA and Mormon presence within the CIA, raising questions about political influence and internal dynamics within the intelligence community.</p>                 <p><small>Sources: 2</small></p>             </div>             </div>`)[0];
+                popup_fa7813226035d5a28361fe0b5adf330c.setContent(html_8e3e1039d6f10e8b9fea02b50f7ab5d3);
+            
+        
+
+        circle_marker_7cb342824d5cfc77b3b8dbd08cd7415f.bindPopup(popup_fa7813226035d5a28361fe0b5adf330c)
+        ;
+
+        
+    
+    
+            var circle_marker_84b4d3fa641bcd1f04bb45e6bbd7b4db = L.circleMarker(
+                [39.7837304, -100.445882],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_ec6b29c0e787523c033c610cd066eb66 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eeac329290a7bfe8dff8495ed1e8ab1c = $(`<div id="html_eeac329290a7bfe8dff8495ed1e8ab1c" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Allegations of Jeffrey Epstein Hiring Federal Agents</h4>                 <p><b>Location:</b> United States</p>                 <p><b>Severity:</b> 0.6</p>                 <p><b>Entities:</b> Jeffrey Epstein, Federal Agents</p>                 <p>Allegations are being discussed regarding Jeffrey Epstein's purported practice of hiring federal agents.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_ec6b29c0e787523c033c610cd066eb66.setContent(html_eeac329290a7bfe8dff8495ed1e8ab1c);
+            
+        
+
+        circle_marker_84b4d3fa641bcd1f04bb45e6bbd7b4db.bindPopup(popup_ec6b29c0e787523c033c610cd066eb66)
+        ;
+
+        
+    
+    
+            var circle_marker_d9450f425c33a95ab93c0cd0e0fc0231 = L.circleMarker(
+                [54.7023545, -3.2765753],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_6ecd918869616819f9693b586f1f9af9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c3d213e3891dbe1d2869ad2d46f2eb30 = $(`<div id="html_c3d213e3891dbe1d2869ad2d46f2eb30" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>OBR Leak and Rachel Reeves' 'Disaster Moment'</h4>                 <p><b>Location:</b> United Kingdom</p>                 <p><b>Severity:</b> 0.4</p>                 <p><b>Entities:</b> OBR, Rachel Reeves</p>                 <p>An OBR leak has reportedly created a 'disaster moment' for Rachel Reeves in UK politics, with details of the internal intelligence event being discussed.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_6ecd918869616819f9693b586f1f9af9.setContent(html_c3d213e3891dbe1d2869ad2d46f2eb30);
+            
+        
+
+        circle_marker_d9450f425c33a95ab93c0cd0e0fc0231.bindPopup(popup_6ecd918869616819f9693b586f1f9af9)
+        ;
+
+        
+    
+    
+            var circle_marker_c11a1e0955062056bdfad0f2eb4d5617 = L.circleMarker(
+                [23.9739374, 120.9820179],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_6c838e8ecd7c4d1a9565ee1ccbca9887 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_50b7620ac44cecba78bd719b625a6d2a = $(`<div id="html_50b7620ac44cecba78bd719b625a6d2a" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Taiwan-China Military Buildup and Invasion Concerns</h4>                 <p><b>Location:</b> Taiwan, China</p>                 <p><b>Severity:</b> 0.9</p>                 <p><b>Entities:</b> Taiwan, China</p>                 <p>Taiwan has announced a $40 billion supplementary defense budget to prepare for a potential 2027 Chinese invasion, as China increases its military budget by 7.2% and conducts aggressive electronic warfare exercises.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_6c838e8ecd7c4d1a9565ee1ccbca9887.setContent(html_50b7620ac44cecba78bd719b625a6d2a);
+            
+        
+
+        circle_marker_c11a1e0955062056bdfad0f2eb4d5617.bindPopup(popup_6c838e8ecd7c4d1a9565ee1ccbca9887)
+        ;
+
+        
+    
+    
+            var circle_marker_0b197c3c32eabc19ae3f3f9f804edd60 = L.circleMarker(
+                [51.566874, 4.9284972],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_87447592acd7e75c2b16f39c4a780a44 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_697d93c6e3348b44a621e8087e47fb01 = $(`<div id="html_697d93c6e3348b44a621e8087e47fb01" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Intelligence Newsletter Publication</h4>                 <p><b>Location:</b> N/A</p>                 <p><b>Severity:</b> 0.1</p>                 <p><b>Entities:</b> </p>                 <p>An intelligence newsletter dated November 27th has been released.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_87447592acd7e75c2b16f39c4a780a44.setContent(html_697d93c6e3348b44a621e8087e47fb01);
+            
+        
+
+        circle_marker_0b197c3c32eabc19ae3f3f9f804edd60.bindPopup(popup_87447592acd7e75c2b16f39c4a780a44)
+        ;
+
+        
+    
+    
+            var circle_marker_066ed79712eb78c440d1f144ccf9cfe9 = L.circleMarker(
+                [13.881273, 39.127495],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_a00fb785963f0bb9202da8f5151f0ead = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_284c660e25428cb47c58cb65c2b13f72 = $(`<div id="html_284c660e25428cb47c58cb65c2b13f72" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Ethiopia Civil War: Atrocities and External Support</h4>                 <p><b>Location:</b> Ethiopia (Tigray region)</p>                 <p><b>Severity:</b> 1.0</p>                 <p><b>Entities:</b> Ethiopia, Tigray forces, Filsan Abdi, Iran, United States</p>                 <p>The Ethiopian civil war continues with reports of war crimes against women and girls, the collapse of the Tigray medical system, and hyenas scavenging on corpses, while the US alleges Iran supplied Ethiopia with military drones in violation of a UN resolution.</p>                 <p><small>Sources: 4</small></p>             </div>             </div>`)[0];
+                popup_a00fb785963f0bb9202da8f5151f0ead.setContent(html_284c660e25428cb47c58cb65c2b13f72);
+            
+        
+
+        circle_marker_066ed79712eb78c440d1f144ccf9cfe9.bindPopup(popup_a00fb785963f0bb9202da8f5151f0ead)
+        ;
+
+        
+    
+    
+            var circle_marker_11b2c962897752418622bafbc8679fed = L.circleMarker(
+                [55.702215, 12.5592485],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_2906301e281bca723300205adcbe0b57 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f19a2804984a0699eb409577683d751a = $(`<div id="html_f19a2804984a0699eb409577683d751a" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>Global AI Strategic Challenges and Market Risks</h4>                 <p><b>Location:</b> Global</p>                 <p><b>Severity:</b> 0.7</p>                 <p><b>Entities:</b> Department of Defense (DoD), Congress, China, AI developers/companies</p>                 <p>Discussions highlight the strategic policy choices for AI use in defense, potential for AI misuse in gray zone operations, and the implications of a potential AI market correction amidst technological competition with China.</p>                 <p><small>Sources: 2</small></p>             </div>             </div>`)[0];
+                popup_2906301e281bca723300205adcbe0b57.setContent(html_f19a2804984a0699eb409577683d751a);
+            
+        
+
+        circle_marker_11b2c962897752418622bafbc8679fed.bindPopup(popup_2906301e281bca723300205adcbe0b57)
+        ;
+
+        
+    
+    
+            var circle_marker_083738f897512674314a213cc4afcffa = L.circleMarker(
+                [39.7837304, -100.445882],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+    
+        var popup_d19d64640480060148c53b5001b46a2f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9f1d03f2b2ea6b0139cdc110af7d0d0c = $(`<div id="html_9f1d03f2b2ea6b0139cdc110af7d0d0c" style="width: 100.0%; height: 100.0%;">             <div style="width:300px">                 <h4>US Political System Crisis and Institutional Erosion</h4>                 <p><b>Location:</b> United States</p>                 <p><b>Severity:</b> 0.6</p>                 <p><b>Entities:</b> American political system, government administration, justice system, news media, education system, political opposition leaders, civil servants</p>                 <p>Reports describe a crisis in the American political system, marked by doubts in government function, politicization of the justice system, and attacks on independent institutions.</p>                 <p><small>Sources: 1</small></p>             </div>             </div>`)[0];
+                popup_d19d64640480060148c53b5001b46a2f.setContent(html_9f1d03f2b2ea6b0139cdc110af7d0d0c);
+            
+        
+
+        circle_marker_083738f897512674314a213cc4afcffa.bindPopup(popup_d19d64640480060148c53b5001b46a2f)
+        ;
+
+        
+    
+    
+            var heat_map_f3d5ed609923c2f2fc59b523f4c937d8 = L.heatLayer(
+                [[38.8950368, -77.0365427, 0.7], [39.7837304, -100.445882, 0.2], [51.566874, 4.9284972, 0.1], [38.9435143, -77.0680334, 0.5], [31.9514266, -102.1729563, 0.4], [-28.8166236, 24.991639, 0.5], [64.6863136, 97.7453061, 0.3], [29.5619093, 106.5741998, 0.5], [-35.3051067, 149.1134993, 0.6], [51.5095043, -0.1916457, 0.5], [12.5433216, 104.8144914, 0.6], [47.0190847, 28.8373902, 0.3], [38.9505217, -77.1452245, 0.4], [39.7837304, -100.445882, 0.6], [54.7023545, -3.2765753, 0.4], [23.9739374, 120.9820179, 0.9], [51.566874, 4.9284972, 0.1], [13.881273, 39.127495, 1.0], [55.702215, 12.5592485, 0.7], [39.7837304, -100.445882, 0.6]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 1,
+  "radius": 15,
+  "blur": 10,
+}
+            );
+        
+    
+            heat_map_f3d5ed609923c2f2fc59b523f4c937d8.addTo(map_e50e62b349ad70685de53b629052ee59);
+        
+</script>
 </html>
